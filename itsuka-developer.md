@@ -6,19 +6,19 @@ Do not do any refactoring of existing options. You are allowed to break this rul
 
 In Nagram, if an option is covered in `NekoConfig`, we have to use `NekoConfig.disableOption.Bool()` not `NekoConfig.disableOption`.
 
-If asked to develop a feature, you need to register them in these files: `NekoGeneralSettingsActivity.java`, `NaConfig.kt`, `strings_na.xml`. Refrain from registering them in `NekoConfig.java` since `NekoConfig.java` is not for adding new features; it does exist in Nagram since some features are based on Nekogram and NekoX.
+If asked to develop a feature, you need to register them in these files: `TMessagesProj/src/main/java/tw/nekomimi/nekogram/settings/NekoGeneralSettingsActivity.java`, `TMessagesProj/src/main/kotlin/xyz/nextalone/nagram/NaConfig.kt`, `TMessagesProj/src/main/res/values/strings_na.xml`. Refrain from registering them in `TMessagesProj/src/main/java/tw/nekomimi/nekogram/NekoConfig.java` since `TMessagesProj/src/main/java/tw/nekomimi/nekogram/NekoConfig.java` is not for adding new features; it does exist in Nagram since some features are based on Nekogram and NekoX.
 
-Refrain from adding an explanation of the feature in `strings_na.xml`.
+Refrain from adding an explanation of the feature in `TMessagesProj/src/main/res/values/strings_na.xml`.
 
-For example, in `strings_na.xml`, options are added:
+For example, in `TMessagesProj/src/main/res/values/strings_na.xml`, options are added:
 
 > `<string name="DisableOption">Disable option</string>`
 
-For example, in `NekoGeneralSettingsActivity.java`, options are registered:
+For example, in `TMessagesProj/src/main/java/tw/nekomimi/nekogram/settings/NekoGeneralSettingsActivity.java`, options are registered:
 
 > `private final AbstractConfigCell disableOptionRow = cellGroup.appendCell(new ConfigCellTextCheck(NaConfig.INSTANCE.getDisableOption()));`
 
-For example, registering in `NaConfig.kt`:
+For example, registering in `TMessagesProj/src/main/kotlin/xyz/nextalone/nagram/NaConfig.kt`:
 
 **bool:**
 ```kotlin
