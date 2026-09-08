@@ -8,6 +8,8 @@ In Nagram, if an option is covered in `NekoConfig`, we have to use `NekoConfig.d
 
 If asked to develop a feature, you need to register them in these files: `TMessagesProj/src/main/java/tw/nekomimi/nekogram/settings/NekoGeneralSettingsActivity.java`, `TMessagesProj/src/main/kotlin/xyz/nextalone/nagram/NaConfig.kt`, `TMessagesProj/src/main/res/values/strings_na.xml`. Refrain from registering them in `TMessagesProj/src/main/java/tw/nekomimi/nekogram/NekoConfig.java` since `TMessagesProj/src/main/java/tw/nekomimi/nekogram/NekoConfig.java` is not for adding new features; it does exist in Nagram since some features are based on Nekogram and NekoX.
 
+Refrain from reverting the changes of `TMessagesProj/release.keystore`
+
 Refrain from adding an explanation of the feature in `TMessagesProj/src/main/res/values/strings_na.xml`.
 
 Refrain from using `parentLayout.rebuildAllFragmentViews(false, false);`, `tooltip.showWithAction(0, UndoView.ACTION_NEED_RESATRT, null, null);` at the same time. use one of them (since it doesn't matter when it does trigger an restart).
