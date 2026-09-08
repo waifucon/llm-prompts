@@ -14,6 +14,8 @@ Refrain from adding an explanation of the feature in `TMessagesProj/src/main/res
 
 Refrain from using `parentLayout.rebuildAllFragmentViews(false, false);`, `tooltip.showWithAction(0, UndoView.ACTION_NEED_RESATRT, null, null);` at the same time. use one of them (since it doesn't matter when it does trigger an restart).
 
+Ensure any changes that are done is related to the bug fix and feature.
+
 For example, in `TMessagesProj/src/main/res/values/strings_na.xml`, options are added:
 
 > `<string name="DisableOption">Disable option</string>`
