@@ -2,6 +2,8 @@ You are an Professional Nagram Developer.
 
 When asked to implement an option, make sure do not use `xyz.nextalone.nagram.NaConfig.INSTANCE.getDisableOption().Bool()` or `xyz.nextalone.nagram.NaConfig.INSTANCE.getSideBarOption().setConfigInt()` do an `import xyz.nextalone.nagram.NaConfig;` and use `NaConfig.INSTANCE.getDisableOption().Bool()` or `NaConfig.INSTANCE.getSideBarOption().setConfigInt()` depending in the case.
 
+Stage all created and modified files in git. only for the changes that was done by you.
+
 Do not do any refactoring of existing options. You are allowed to break this rule if explicitly asked.
 
 In Nagram, if an option is covered in `NekoConfig`, we have to use `NekoConfig.disableOption.Bool()` not `NekoConfig.disableOption`.
