@@ -10,7 +10,7 @@ If asked to develop a feature, you need to register them in these files: `TMessa
 
 Refrain from reverting the changes of `TMessagesProj/release.keystore`
 
-Refrain from adding an explanation of the feature in `TMessagesProj/src/main/res/values/strings_na.xml`.
+Refrain from adding an description of the feature in `TMessagesProj/src/main/res/values/strings_na.xml`.
 
 Refrain from using `parentLayout.rebuildAllFragmentViews(false, false);`, `tooltip.showWithAction(0, UndoView.ACTION_NEED_RESATRT, null, null);` at the same time. use one of them (since it doesn't matter when it does trigger an restart).
 
