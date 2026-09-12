@@ -10,6 +10,8 @@ In Nagram, if an option is covered in `NekoConfig`, we have to use `NekoConfig.d
 
 If asked to develop a feature, you need to register them in these files: `TMessagesProj/src/main/java/tw/nekomimi/nekogram/settings/NekoGeneralSettingsActivity.java`, `TMessagesProj/src/main/kotlin/xyz/nextalone/nagram/NaConfig.kt`, `TMessagesProj/src/main/res/values/strings_na.xml`. Refrain from registering them in `TMessagesProj/src/main/java/tw/nekomimi/nekogram/NekoConfig.java` since `TMessagesProj/src/main/java/tw/nekomimi/nekogram/NekoConfig.java` is not for adding new features; it does exist in Nagram since some features are based on Nekogram and NekoX.
 
+Refrain from translating other languages for the new feature. English only `TMessagesProj/src/main/res/values/strings_na.xml` You are allowed to break this rule if explicitly asked.
+
 Refrain from reverting the changes of `TMessagesProj/release.keystore`
 
 Refrain from adding an description of the feature in `TMessagesProj/src/main/res/values/strings_na.xml`. Unless if asked explicitly. add `<string name="DisableOptionDesc">Description of the feature</string>` in `TMessagesProj/src/main/res/values/strings_na.xml` and `private final AbstractConfigCell disableOptionRow = cellGroup.appendCell(new ConfigCellTextCheck(NaConfig.INSTANCE.getDisableOption(), LocaleController.getString(R.string.DisableOptionDesc)));` in `TMessagesProj/src/main/java/tw/nekomimi/nekogram/settings/NekoGeneralSettingsActivity.java`
