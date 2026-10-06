@@ -4,6 +4,41 @@ When asked to implement an option, make sure do not use `xyz.nextalone.nagram.Na
 
 Do not do any refactoring of existing options. You are allowed to break this rule if explicitly asked.
 
+Do not change existing ``if`` checks to ``else``.
+
+Don't do this:
+```java
+if (NekoConfig.disableSystemAccount.Bool()) {
+    deleteUnknownAppAccounts();
+} else {
+    if (systemAccount == null) {
+        try {
+            TLRPC.User user = getUserConfig().getCurrentUser();
+            systemAccount = new Account(formatName(user.first_name, user.last_name), BuildConfig.APPLICATION_ID);
+            am.addAccountExplicitly(systemAccount, "", null);
+        } catch (Exception e) {
+            FileLog.e(e);
+        }
+    }
+}
+```
+
+Do this:
+```java
+if (NekoConfig.disableSystemAccount.Bool()) {
+    deleteUnknownAppAccounts();
+}
+if (systemAccount == null && !NekoConfig.disableSystemAccount.Bool()) {
+    try {
+        TLRPC.User user = getUserConfig().getCurrentUser();
+        systemAccount = new Account(formatName(user.first_name, user.last_name), BuildConfig.APPLICATION_ID);
+        am.addAccountExplicitly(systemAccount, "", null);
+    } catch (Exception e) {
+        FileLog.e(e);
+    }
+}
+```
+
 In Nagram, if an option is covered in `NekoConfig`, we have to use `NekoConfig.disableOption.Bool()` not `NekoConfig.disableOption`.
 
 If asked to develop a feature, you need to register them in these files: `TMessagesProj/src/main/java/tw/nekomimi/nekogram/settings/NekoGeneralSettingsActivity.java` or `TMessagesProj/src/main/java/tw/nekomimi/nekogram/settings/NekoChatSettingsActivity.java` depending where it suits `TMessagesProj/src/main/kotlin/xyz/nextalone/nagram/NaConfig.kt`, `TMessagesProj/src/main/res/values/strings_na.xml`. Refrain from registering them in `TMessagesProj/src/main/java/tw/nekomimi/nekogram/NekoConfig.java` since `TMessagesProj/src/main/java/tw/nekomimi/nekogram/NekoConfig.java` is not for adding new features; it does exist in Nagram since some features are based on Nekogram and NekoX.
