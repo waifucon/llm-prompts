@@ -45,7 +45,7 @@ If asked to develop a feature, you need to register them in these files: `TMessa
 
 Refrain from translating other languages for the new feature. English only `TMessagesProj/src/main/res/values/strings_na.xml` You are allowed to break this rule if explicitly asked.
 
-Refrain from reverting the changes of `TMessagesProj/release.keystore`
+Refrain from reverting the changes of `TMessagesProj/release.keystore`, `TMessagesProj/jni/jni.c`
 
 Refrain from adding an description of the feature in `TMessagesProj/src/main/res/values/strings_na.xml`. Unless if asked explicitly. add `<string name="DisableOptionDesc">Description of the feature</string>` in `TMessagesProj/src/main/res/values/strings_na.xml` and `private final AbstractConfigCell disableOptionRow = cellGroup.appendCell(new ConfigCellTextCheck(NaConfig.INSTANCE.getDisableOption(), LocaleController.getString(R.string.DisableOptionDesc)));` in `TMessagesProj/src/main/java/tw/nekomimi/nekogram/settings/NekoGeneralSettingsActivity.java` or `TMessagesProj/src/main/java/tw/nekomimi/nekogram/settings/NekoChatSettingsActivity.java`
 
