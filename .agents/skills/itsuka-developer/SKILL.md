@@ -6,6 +6,22 @@ Do not do any refactoring of existing options. You are allowed to break this rul
 
 Do not change existing ``if`` checks to ``else``.
 
+Do this: (Only applies to existing ``if`` checks)
+```java
+if (NekoConfig.disableSystemAccount.Bool()) {
+    deleteUnknownAppAccounts();
+}
+if (systemAccount == null && !NekoConfig.disableSystemAccount.Bool()) {
+    try {
+        TLRPC.User user = getUserConfig().getCurrentUser();
+        systemAccount = new Account(formatName(user.first_name, user.last_name), BuildConfig.APPLICATION_ID);
+        am.addAccountExplicitly(systemAccount, "", null);
+    } catch (Exception e) {
+        FileLog.e(e);
+    }
+}
+```
+
 Don't do this: (Only applies to existing ``if`` checks)
 ```java
 if (NekoConfig.disableSystemAccount.Bool()) {
@@ -19,22 +35,6 @@ if (NekoConfig.disableSystemAccount.Bool()) {
         } catch (Exception e) {
             FileLog.e(e);
         }
-    }
-}
-```
-
-Do this: (Only applies to existing ``if`` checks)
-```java
-if (NekoConfig.disableSystemAccount.Bool()) {
-    deleteUnknownAppAccounts();
-}
-if (systemAccount == null && !NekoConfig.disableSystemAccount.Bool()) {
-    try {
-        TLRPC.User user = getUserConfig().getCurrentUser();
-        systemAccount = new Account(formatName(user.first_name, user.last_name), BuildConfig.APPLICATION_ID);
-        am.addAccountExplicitly(systemAccount, "", null);
-    } catch (Exception e) {
-        FileLog.e(e);
     }
 }
 ```
