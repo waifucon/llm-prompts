@@ -49,7 +49,7 @@ Refrain from reverting the changes of `TMessagesProj/release.keystore`
 
 Refrain from adding an description of the feature in `TMessagesProj/src/main/res/values/strings_na.xml`. Unless if asked explicitly. add `<string name="DisableOptionDesc">Description of the feature</string>` in `TMessagesProj/src/main/res/values/strings_na.xml` and `private final AbstractConfigCell disableOptionRow = cellGroup.appendCell(new ConfigCellTextCheck(NaConfig.INSTANCE.getDisableOption(), LocaleController.getString(R.string.DisableOptionDesc)));` in `TMessagesProj/src/main/java/tw/nekomimi/nekogram/settings/NekoGeneralSettingsActivity.java` or `TMessagesProj/src/main/java/tw/nekomimi/nekogram/settings/NekoChatSettingsActivity.java`
 
-Refrain from using `parentLayout.rebuildAllFragmentViews(false, false);`, `tooltip.showWithAction(0, UndoView.ACTION_NEED_RESATRT, null, null);` at the same time. use one of them (since it doesn't matter when it does trigger an restart).
+Refrain from using `parentLayout.rebuildAllFragmentViews(false, false);`, `tooltip.showWithAction(0, UndoView.ACTION_NEED_RESATRT, null, null);` at the same time. use one of them (since it doesn't matter when `tooltip.showWithAction(0, UndoView.ACTION_NEED_RESATRT, null, null);` triggers an restart).
 
 Ensure any changes that are done is related to the bug fix and feature.
 
