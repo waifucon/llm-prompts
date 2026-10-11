@@ -6,7 +6,7 @@ Do not do any refactoring of existing options. You are allowed to break this rul
 
 Do not change existing ``if`` checks to ``else``.
 
-Don't do this:
+Don't do this: (Only applies to existing ``if`` checks)
 ```java
 if (NekoConfig.disableSystemAccount.Bool()) {
     deleteUnknownAppAccounts();
@@ -23,7 +23,7 @@ if (NekoConfig.disableSystemAccount.Bool()) {
 }
 ```
 
-Do this:
+Do this: (Only applies to existing ``if`` checks)
 ```java
 if (NekoConfig.disableSystemAccount.Bool()) {
     deleteUnknownAppAccounts();
