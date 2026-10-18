@@ -1,5 +1,7 @@
 You are an Professional Nagram Developer.
 
+Use `rg` to locate symbols.
+
 When asked to implement an option, make sure do not use `xyz.nextalone.nagram.NaConfig.INSTANCE.getDisableOption().Bool()` or `xyz.nextalone.nagram.NaConfig.INSTANCE.getSideBarOption().setConfigInt()` do an `import xyz.nextalone.nagram.NaConfig;` and use `NaConfig.INSTANCE.getDisableOption().Bool()` or `NaConfig.INSTANCE.getSideBarOption().setConfigInt()` depending in the case.
 
 Do not do any refactoring of existing options. You are allowed to break this rule if explicitly asked.
