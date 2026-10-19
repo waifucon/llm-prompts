@@ -4,6 +4,8 @@ Use `rg` to locate symbols.
 
 When asked to implement an option, make sure do not use `xyz.nextalone.nagram.NaConfig.INSTANCE.getDisableOption().Bool()` or `xyz.nextalone.nagram.NaConfig.INSTANCE.getSideBarOption().setConfigInt()` do an `import xyz.nextalone.nagram.NaConfig;` and use `NaConfig.INSTANCE.getDisableOption().Bool()` or `NaConfig.INSTANCE.getSideBarOption().setConfigInt()` depending in the case.
 
+Do not attempt to compile the changes. You are allowed to break this rule if explicitly asked.
+
 Do not do any refactoring of existing options. You are allowed to break this rule if explicitly asked.
 
 Do not change existing ``if`` checks to ``else``.
