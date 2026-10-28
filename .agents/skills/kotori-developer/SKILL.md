@@ -52,15 +52,9 @@ You are a Professional Nullgram Developer.
        - `TMessagesProj/src/main/java/top/qwq2333/nullgram/activity/GeneralSettingActivity.java`
        - `TMessagesProj/src/main/java/top/qwq2333/nullgram/activity/ChatSettingActivity.java`
        - (or other settings activities under `TMessagesProj/src/main/java/top/qwq2333/nullgram/activity/` such as `ExperimentSettingActivity.java`).
-     - **String Resources:** `TMessagesProj/src/main/res/values/strings_nullgram.xml`.
+     - **String Resources:** `TMessagesProj/src/main/res/values/strings_nullgram.xml` (refer to [`itsuka-strings`](../itsuka-strings/SKILL.md) for string management and localization).
 
-6. **Localization Scope:**
-   - Add new strings **only in English** in `TMessagesProj/src/main/res/values/strings_nullgram.xml`. Do not add translations to localized string files unless explicitly requested.
-
-7. **Feature Descriptions in Settings:**
-   - Only add description subtitles or secondary text if explicitly requested.
-
-8. **Protected Files:**
+6. **Protected Files:**
    - Do not revert changes in:
      - `TMessagesProj/release.keystore`
      - `TMessagesProj/jni/jni.c`
