@@ -1,90 +1,111 @@
-You are an Professional Nagram Developer.
+You are a Professional Nagram Developer.
 
-Use `rg` to locate symbols.
+## Core Directives & Workflow
 
-When asked to implement an option, make sure do not use `xyz.nextalone.nagram.NaConfig.INSTANCE.getDisableOption().Bool()` or `xyz.nextalone.nagram.NaConfig.INSTANCE.getSideBarOption().setConfigInt()` do an `import xyz.nextalone.nagram.NaConfig;` and use `NaConfig.INSTANCE.getDisableOption().Bool()` or `NaConfig.INSTANCE.getSideBarOption().setConfigInt()` depending in the case.
+1. **Locating Symbols:**
+   - Always use `rg` (ripgrep) to search for symbols and locate references efficiently.
 
-Do not attempt to compile the changes. You are allowed to break this rule if explicitly asked.
+2. **Clean Imports:**
+   - Always import classes explicitly instead of using inline, fully-qualified package names across the codebase.
 
-Do not do any refactoring of existing options. You are allowed to break this rule if explicitly asked.
+3. **No Unrequested Compilation:**
+   - Do not attempt to build or compile the project unless the user explicitly asks for it.
 
-Do not change existing ``if`` checks to ``else``.
+4. **Strict Conditional Logic (Preserve Existing `if` Checks):**
+   - Do not convert existing sequential `if` checks into `if / else` blocks. Maintain the existing control flow patterns.
+   - **Correct:**
+     ```java
+     if (NekoConfig.disableSystemAccount.Bool()) {
+         deleteUnknownAppAccounts();
+     }
+     if (systemAccount == null && !NekoConfig.disableSystemAccount.Bool()) {
+         try {
+             TLRPC.User user = getUserConfig().getCurrentUser();
+             systemAccount = new Account(formatName(user.first_name, user.last_name), BuildConfig.APPLICATION_ID);
+             am.addAccountExplicitly(systemAccount, "", null);
+         } catch (Exception e) {
+             FileLog.e(e);
+         }
+     }
+     ```
+   - **Incorrect:**
+     ```java
+     if (NekoConfig.disableSystemAccount.Bool()) {
+         deleteUnknownAppAccounts();
+     } else {
+         if (systemAccount == null) {
+             try {
+                 TLRPC.User user = getUserConfig().getCurrentUser();
+                 systemAccount = new Account(formatName(user.first_name, user.last_name), BuildConfig.APPLICATION_ID);
+                 am.addAccountExplicitly(systemAccount, "", null);
+             } catch (Exception e) {
+                 FileLog.e(e);
+             }
+         }
+     }
+     ```
 
-Correct Way: (Only applies to existing ``if`` checks)
+5. **Feature Registration & Architecture:**
+   - When developing a new feature or setting, register it in:
+     - `TMessagesProj/src/main/kotlin/xyz/nextalone/nagram/NaConfig.kt`
+     - Settings activity: `TMessagesProj/src/main/java/tw/nekomimi/nekogram/settings/NekoGeneralSettingsActivity.java` or `TMessagesProj/src/main/java/tw/nekomimi/nekogram/settings/NekoChatSettingsActivity.java` (depending on relevance).
+     - String resources: `TMessagesProj/src/main/res/values/strings_na.xml`
+   - **Never** add new features to `TMessagesProj/src/main/java/tw/nekomimi/nekogram/NekoConfig.java`. That file is legacy inherited from Nekogram/NekoX.
+
+6. **Localization Scope:**
+   - Add new strings **only in English** in `TMessagesProj/src/main/res/values/strings_na.xml`. Do not add translations for other language folders unless explicitly requested.
+
+7. **Feature Descriptions in Settings:**
+   - By default, do not add description subtitles for settings in `strings_na.xml` or the settings UI unless explicitly requested.
+   - If a description is explicitly requested:
+     - In `TMessagesProj/src/main/res/values/strings_na.xml`:
+       ```xml
+       <string name="DisableOptionDesc">Description of the feature</string>
+       ```
+     - In `NekoGeneralSettingsActivity.java` / `NekoChatSettingsActivity.java`:
+       ```java
+       private final AbstractConfigCell disableOptionRow = cellGroup.appendCell(new ConfigCellTextCheck(NaConfig.INSTANCE.getDisableOption(), LocaleController.getString(R.string.DisableOptionDesc)));
+       ```
+
+8. **UI Updates & App Restart Triggers:**
+   - Never call both `parentLayout.rebuildAllFragmentViews(false, false);` and `tooltip.showWithAction(0, UndoView.ACTION_NEED_RESATRT, null, null);` together. Pick only one depending on whether an immediate view rebuild suffices or a restart tooltip is required.
+
+9. **Protected Files:**
+   - Do not revert changes in:
+     - `TMessagesProj/release.keystore`
+     - `TMessagesProj/jni/jni.c`
+
+---
+
+## Configuration Registration Examples
+
+### 1. `TMessagesProj/src/main/res/values/strings_na.xml`
+```xml
+<string name="DisableOption">Disable option</string>
+```
+
+### 2. `TMessagesProj/src/main/kotlin/xyz/nextalone/nagram/NaConfig.kt`
+- **Boolean Option:**
+  ```kotlin
+  val disableOption =
+      addConfig(
+          "DisableOption",
+          ConfigItem.configTypeBool,
+          false
+      )
+  ```
+- **Integer Option:**
+  ```kotlin
+  val sideBarOption =
+      addConfig(
+          "SideBarOption",
+          ConfigItem.configTypeInt,
+          0
+      )
+  ```
+
+### 3. Settings Activity Registration
+In `NekoGeneralSettingsActivity.java` or `NekoChatSettingsActivity.java`:
 ```java
-if (NekoConfig.disableSystemAccount.Bool()) {
-    deleteUnknownAppAccounts();
-}
-if (systemAccount == null && !NekoConfig.disableSystemAccount.Bool()) {
-    try {
-        TLRPC.User user = getUserConfig().getCurrentUser();
-        systemAccount = new Account(formatName(user.first_name, user.last_name), BuildConfig.APPLICATION_ID);
-        am.addAccountExplicitly(systemAccount, "", null);
-    } catch (Exception e) {
-        FileLog.e(e);
-    }
-}
-```
-
-Wrong Way: (Only applies to existing ``if`` checks)
-```java
-if (NekoConfig.disableSystemAccount.Bool()) {
-    deleteUnknownAppAccounts();
-} else {
-    if (systemAccount == null) {
-        try {
-            TLRPC.User user = getUserConfig().getCurrentUser();
-            systemAccount = new Account(formatName(user.first_name, user.last_name), BuildConfig.APPLICATION_ID);
-            am.addAccountExplicitly(systemAccount, "", null);
-        } catch (Exception e) {
-            FileLog.e(e);
-        }
-    }
-}
-```
-
-In Nagram, if an option is covered in `NekoConfig`, we have to use `NekoConfig.disableOption.Bool()` not `NekoConfig.disableOption`.
-
-If asked to develop a feature, you need to register them in these files: `TMessagesProj/src/main/java/tw/nekomimi/nekogram/settings/NekoGeneralSettingsActivity.java` or `TMessagesProj/src/main/java/tw/nekomimi/nekogram/settings/NekoChatSettingsActivity.java` depending where it suits `TMessagesProj/src/main/kotlin/xyz/nextalone/nagram/NaConfig.kt`, `TMessagesProj/src/main/res/values/strings_na.xml`. Refrain from registering them in `TMessagesProj/src/main/java/tw/nekomimi/nekogram/NekoConfig.java` since `TMessagesProj/src/main/java/tw/nekomimi/nekogram/NekoConfig.java` is not for adding new features; it does exist in Nagram since some features are based on Nekogram and NekoX.
-
-Refrain from translating other languages for the new feature. English only `TMessagesProj/src/main/res/values/strings_na.xml` You are allowed to break this rule if explicitly asked.
-
-Refrain from reverting the changes of `TMessagesProj/release.keystore`, `TMessagesProj/jni/jni.c`
-
-Refrain from adding an description of the feature in `TMessagesProj/src/main/res/values/strings_na.xml`. Unless if asked explicitly. add `<string name="DisableOptionDesc">Description of the feature</string>` in `TMessagesProj/src/main/res/values/strings_na.xml` and `private final AbstractConfigCell disableOptionRow = cellGroup.appendCell(new ConfigCellTextCheck(NaConfig.INSTANCE.getDisableOption(), LocaleController.getString(R.string.DisableOptionDesc)));` in `TMessagesProj/src/main/java/tw/nekomimi/nekogram/settings/NekoGeneralSettingsActivity.java` or `TMessagesProj/src/main/java/tw/nekomimi/nekogram/settings/NekoChatSettingsActivity.java`
-
-Refrain from using `parentLayout.rebuildAllFragmentViews(false, false);`, `tooltip.showWithAction(0, UndoView.ACTION_NEED_RESATRT, null, null);` at the same time. use one of them (since it doesn't matter when `tooltip.showWithAction(0, UndoView.ACTION_NEED_RESATRT, null, null);` triggers an restart).
-
-Ensure any changes that are done is related to the bug fix and feature.
-
-For example, in `TMessagesProj/src/main/res/values/strings_na.xml`, options are added:
-
-> `<string name="DisableOption">Disable option</string>`
-
-For example, in `TMessagesProj/src/main/java/tw/nekomimi/nekogram/settings/NekoGeneralSettingsActivity.java`, options are registered:
-
-> `private final AbstractConfigCell disableOptionRow = cellGroup.appendCell(new ConfigCellTextCheck(NaConfig.INSTANCE.getDisableOption()));`
-
-For example, registering in `TMessagesProj/src/main/kotlin/xyz/nextalone/nagram/NaConfig.kt`:
-
-**bool:**
-```kotlin
-val disableOption =
-    addConfig(
-        "DisableOption",
-        ConfigItem.configTypeBool,
-        false
-    )
-
-```
-
-**int:**
-```kotlin
-val sideBarOption =
-    addConfig(
-        "SideBarOption",
-        ConfigItem.configTypeInt,
-        0
-    )
-
+private final AbstractConfigCell disableOptionRow = cellGroup.appendCell(new ConfigCellTextCheck(NaConfig.INSTANCE.getDisableOption()));
 ```
