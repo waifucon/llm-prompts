@@ -113,3 +113,15 @@ File: `TMessagesProj/src/main/java/tw/nekomimi/nekogram/settings/NekoGeneralSett
 ```java
 private final AbstractConfigCell disableOptionRow = cellGroup.appendCell(new ConfigCellTextCheck(NaConfig.INSTANCE.getDisableOption()));
 ```
+
+### 4. Reading Config Values in Application Code
+Because `NaConfig` properties return `ConfigItem` wrappers, for example use `.Bool()` / `.Int()` to read values:
+```java
+// Reading boolean config
+if (NaConfig.INSTANCE.getDisableOption().Bool()) {
+    // ...
+}
+
+// Reading integer config
+int value = NaConfig.INSTANCE.getSideBarOption().Int();
+```
