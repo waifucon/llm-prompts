@@ -46,7 +46,7 @@ You are a Professional Nagram Developer.
      ```
 
 5. **Feature Registration & Architecture:**
-   - When developing a new feature or setting, register it in:
+   - When developing a new feature or setting, register it across these layers:
      - `TMessagesProj/src/main/kotlin/xyz/nextalone/nagram/NaConfig.kt`
      - Settings activity: `TMessagesProj/src/main/java/tw/nekomimi/nekogram/settings/NekoGeneralSettingsActivity.java` or `TMessagesProj/src/main/java/tw/nekomimi/nekogram/settings/NekoChatSettingsActivity.java` (depending on relevance).
      - String resources: `TMessagesProj/src/main/res/values/strings_na.xml`
@@ -62,7 +62,7 @@ You are a Professional Nagram Developer.
        ```xml
        <string name="DisableOptionDesc">Description of the feature</string>
        ```
-     - In `NekoGeneralSettingsActivity.java` / `NekoChatSettingsActivity.java`:
+     - In `TMessagesProj/src/main/java/tw/nekomimi/nekogram/settings/NekoGeneralSettingsActivity.java` or `TMessagesProj/src/main/java/tw/nekomimi/nekogram/settings/NekoChatSettingsActivity.java`:
        ```java
        private final AbstractConfigCell disableOptionRow = cellGroup.appendCell(new ConfigCellTextCheck(NaConfig.INSTANCE.getDisableOption(), LocaleController.getString(R.string.DisableOptionDesc)));
        ```
@@ -79,12 +79,15 @@ You are a Professional Nagram Developer.
 
 ## Configuration Registration Examples
 
-### 1. `TMessagesProj/src/main/res/values/strings_na.xml`
+### 1. String Resource in `strings_na.xml`
+File: `TMessagesProj/src/main/res/values/strings_na.xml`
 ```xml
 <string name="DisableOption">Disable option</string>
 ```
 
-### 2. `TMessagesProj/src/main/kotlin/xyz/nextalone/nagram/NaConfig.kt`
+### 2. Config Key in `NaConfig.kt`
+File: `TMessagesProj/src/main/kotlin/xyz/nextalone/nagram/NaConfig.kt`
+
 - **Boolean Option:**
   ```kotlin
   val disableOption =
@@ -94,6 +97,7 @@ You are a Professional Nagram Developer.
           false
       )
   ```
+
 - **Integer Option:**
   ```kotlin
   val sideBarOption =
@@ -104,8 +108,8 @@ You are a Professional Nagram Developer.
       )
   ```
 
-### 3. Settings Activity Registration
-In `NekoGeneralSettingsActivity.java` or `NekoChatSettingsActivity.java`:
+### 3. Setting UI Registration in Settings Activity
+File: `TMessagesProj/src/main/java/tw/nekomimi/nekogram/settings/NekoGeneralSettingsActivity.java` or `TMessagesProj/src/main/java/tw/nekomimi/nekogram/settings/NekoChatSettingsActivity.java`:
 ```java
 private final AbstractConfigCell disableOptionRow = cellGroup.appendCell(new ConfigCellTextCheck(NaConfig.INSTANCE.getDisableOption()));
 ```
