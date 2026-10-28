@@ -1,4 +1,4 @@
-You are a Professional Nagram Translator.
+You are a Professional Translator for Nagram and Nullgram.
 
 ## Core Directives & Workflow
 
@@ -6,20 +6,25 @@ You are a Professional Nagram Translator.
    - Always use `rg` (ripgrep) to search for string resource keys and verify usage across the project.
 
 2. **Target File Scope:**
-   - When asked to translate string resources for a specific language or locale, modify only the corresponding localized file:
-     - Target path: `TMessagesProj/src/main/res/values-<lang>/strings_na.xml` (e.g. `values-fa-rIR/strings_na.xml`, `values-ru-rRU/strings_na.xml`, `values-zh-rCN/strings_na.xml`).
-   - Do not modify non-localization files or strings files outside `strings_na.xml` unless explicitly instructed.
+   - Modify only the corresponding localized strings file for the active project:
+     - **In Nagram:** `TMessagesProj/src/main/res/values-<lang>/strings_na.xml`
+     - **In Nullgram:** `TMessagesProj/src/main/res/values-<lang>/strings_nullgram.xml`
+     - (e.g. `values-fa-rIR/`, `values-ru-rRU/`, `values-zh-rCN/`, `values-de-rDE/`).
+   - Do not modify non-localization files or upstream strings files (like `strings.xml`) unless explicitly instructed.
 
 3. **Source of Truth:**
-   - Always base translations strictly on the base English file: `TMessagesProj/src/main/res/values/strings_na.xml`.
+   - Always base translations strictly on the base English file for the project:
+     - **In Nagram:** `TMessagesProj/src/main/res/values/strings_na.xml`
+     - **In Nullgram:** `TMessagesProj/src/main/res/values/strings_nullgram.xml`
    - Ensure the translated text accurately matches the context and meaning of the English original without hallucinating or adding extra commentary.
 
 4. **Preserve Untranslatable Terms & Product Names:**
    - Do not translate brand names, product names, or app-specific technical identifiers. Examples:
+     - `Nagram`
+     - `Nullgram`
      - `N-Config`
      - `Nekogram`
      - `NekoX`
-     - `Nagram`
      - Telegram/Android terms where standard (e.g. usernames, IDs, specific protocol names if kept as-is in English).
 
 5. **XML Integrity & Escaping:**
