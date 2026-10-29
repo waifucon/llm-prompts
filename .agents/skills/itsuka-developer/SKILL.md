@@ -1,64 +1,16 @@
-You are a Professional Nagram Developer.
+You are a Nagram Developer. Always follow the universal guidelines in [`itsuka-general`](../itsuka-general/SKILL.md).
 
-## Core Directives & Workflow
+## Nagram-Specific Directives & Workflow
 
-1. **Locating Symbols:**
-   - Always use `rg` (ripgrep) to search for symbols and locate references efficiently.
-
-2. **Clean Imports:**
-   - Always import classes explicitly instead of using inline, fully-qualified package names across the codebase.
-
-3. **No Unrequested Compilation:**
-   - Do not attempt to build or compile the project unless the user explicitly asks for it.
-
-4. **Strict Conditional Logic (Preserve Existing `if` Checks):**
-   - Do not convert existing sequential `if` checks into `if / else` blocks. Maintain the existing control flow patterns.
-   - **Correct:**
-     ```java
-     if (NekoConfig.disableSystemAccount.Bool()) {
-         deleteUnknownAppAccounts();
-     }
-     if (systemAccount == null && !NekoConfig.disableSystemAccount.Bool()) {
-         try {
-             TLRPC.User user = getUserConfig().getCurrentUser();
-             systemAccount = new Account(formatName(user.first_name, user.last_name), BuildConfig.APPLICATION_ID);
-             am.addAccountExplicitly(systemAccount, "", null);
-         } catch (Exception e) {
-             FileLog.e(e);
-         }
-     }
-     ```
-   - **Incorrect:**
-     ```java
-     if (NekoConfig.disableSystemAccount.Bool()) {
-         deleteUnknownAppAccounts();
-     } else {
-         if (systemAccount == null) {
-             try {
-                 TLRPC.User user = getUserConfig().getCurrentUser();
-                 systemAccount = new Account(formatName(user.first_name, user.last_name), BuildConfig.APPLICATION_ID);
-                 am.addAccountExplicitly(systemAccount, "", null);
-             } catch (Exception e) {
-                 FileLog.e(e);
-             }
-         }
-     }
-     ```
-
-5. **Feature Registration & Architecture:**
-   - When developing a new feature or setting, register it across these layers:
+1. **Feature Registration & Architecture:**
+   - When developing a new feature or setting in Nagram, register it across these layers:
      - `TMessagesProj/src/main/kotlin/xyz/nextalone/nagram/NaConfig.kt`
      - Settings activity: `TMessagesProj/src/main/java/tw/nekomimi/nekogram/settings/NekoGeneralSettingsActivity.java` or `TMessagesProj/src/main/java/tw/nekomimi/nekogram/settings/NekoChatSettingsActivity.java` (depending on relevance).
      - String resources: `TMessagesProj/src/main/res/values/strings_na.xml` (refer to [`itsuka-strings`](../itsuka-strings/SKILL.md) for string management and localization).
    - **Never** add new features to `TMessagesProj/src/main/java/tw/nekomimi/nekogram/NekoConfig.java`. That file is legacy inherited from Nekogram/NekoX.
 
-6. **UI Updates & App Restart Triggers:**
+2. **UI Updates & App Restart Triggers:**
    - Never call both `parentLayout.rebuildAllFragmentViews(false, false);` and `tooltip.showWithAction(0, UndoView.ACTION_NEED_RESATRT, null, null);` together. Pick only one depending on whether an immediate view rebuild suffices or a restart tooltip is required.
-
-7. **Protected Files:**
-   - Do not revert changes in:
-     - `TMessagesProj/release.keystore`
-     - `TMessagesProj/jni/jni.c`
 
 ---
 
