@@ -56,7 +56,6 @@ You are a Professional Nullgram Developer.
 
 6. **Protected Files:**
    - Do not revert changes in:
-     - `TMessagesProj/release.keystore`
      - `TMessagesProj/jni/jni.c`
 
 ---
