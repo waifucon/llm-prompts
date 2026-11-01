@@ -8,8 +8,10 @@ You are following the General Development Rules for Nagram and Nullgram.
 2. **Clean Imports:**
    - Always import classes explicitly instead of using inline, fully-qualified package names across the codebase in Java and Kotlin.
 
-3. **No Unrequested Compilation:**
-   - Do not attempt to build or compile the project unless the user explicitly asks for it.
+3. **Compilation & Verification:**
+   - Do not compile automatically on your own.
+   - After completing code modifications, ask the user if they would like to compile with `./gradlew assembleDebug` and verify if the changes work properly.
+   - If the user agrees to compile, install the APK and launch the app on the device afterwards (refer to [`itsuka-adb`](../itsuka-adb/SKILL.md)).
 
 4. **Strict Conditional Logic (Preserve Existing `if` Checks):**
    - Do not convert existing sequential `if` checks into `if / else` blocks. Maintain existing control flow patterns to prevent unintended side effects.
