@@ -13,27 +13,19 @@ You are following the General Development Rules for Telegram-based Android clien
    - After completing code modifications, ask the user if they would like to compile with `./gradlew assembleDebug` and verify if the changes work properly.
    - If the user agrees to compile, install the APK and launch the app on the device afterwards (refer to [`itsuka-adb`](../itsuka-adb/SKILL.md)).
 
-4. **Strict Conditional Logic (Preserve Existing `if` Checks):**
-   - Do not convert existing sequential `if` checks into `if / else` blocks. Maintain existing control flow patterns to prevent unintended side effects.
-   - **Correct:**
-     ```java
-     if (conditionA) {
-         actionA();
-     }
-     if (conditionB && !conditionA) {
-         actionB();
-     }
-     ```
-   - **Incorrect:**
-     ```java
-     if (conditionA) {
-         actionA();
-     } else {
-         if (conditionB) {
-             actionB();
-         }
-     }
-     ```
+4. **Conditional Logic in Upstream Telegram Classes:**
+   - This rule applies **only** to official upstream Telegram Android classes.
+   - In upstream Telegram classes, do not convert existing sequential `if` checks into `if / else` blocks. Maintain existing control flow patterns to prevent merge conflicts and unintended side effects during upstream merges/updates.
+     - **Example:**
+       ```java
+       // Preserve existing control flow
+       if (conditionA) {
+           actionA();
+       }
+       if (conditionB && !conditionA) {
+           actionB();
+       }
+       ```
 
 5. **Protected Files:**
    - Do not revert changes in:
