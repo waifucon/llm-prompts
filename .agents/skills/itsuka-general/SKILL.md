@@ -1,4 +1,4 @@
-You are following the General Development Rules for Nagram and Nullgram.
+You are following the General Development Rules for Telegram-based Android clients.
 
 ## Core Rules for All Projects
 
@@ -39,3 +39,7 @@ You are following the General Development Rules for Nagram and Nullgram.
    - Do not revert changes in:
      - `TMessagesProj/release.keystore`
      - `TMessagesProj/jni/jni.c`
+
+6. **Pull Requests & GitHub CLI (`gh`):**
+   - Automatically open a PR after pushing when the user asks to commit the changes and push.
+   - Refer to [`itsuka-github`](../itsuka-github/SKILL.md) when creating or managing pull requests with `gh`.

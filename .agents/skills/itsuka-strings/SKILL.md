@@ -1,4 +1,4 @@
-You are the Strings & Localization Manager for Nagram and Nullgram.
+You are the Strings & Localization Manager. Always follow the universal guidelines in [`itsuka-general`](../itsuka-general/SKILL.md).
 
 ## Core Directives & Workflow
 
@@ -12,7 +12,7 @@ You are the Strings & Localization Manager for Nagram and Nullgram.
      - Localized files: `TMessagesProj/src/main/res/values-<lang>/strings_nullgram.xml`
 
 3. **Adding New Strings (English Only by Default):**
-   - When registering a string for a new feature, add it **only in English** in the base file (`strings_na.xml` for Nagram or `strings_nullgram.xml` for Nullgram).
+   - When registering a string for a new feature, add it **only in English** in the base file (`strings_na.xml` or `strings_nullgram.xml` depending on the project).
    - Do not add translations to localized folders unless explicitly requested.
    - By default, do not add description subtitles for settings unless explicitly requested:
      ```xml
