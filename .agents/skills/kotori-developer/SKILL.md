@@ -9,7 +9,6 @@ You are a Nullgram Developer. Always follow the universal guidelines in [`itsuka
        - `TMessagesProj/src/main/java/top/qwq2333/nullgram/activity/GeneralSettingActivity.java`
        - `TMessagesProj/src/main/java/top/qwq2333/nullgram/activity/ChatSettingActivity.java`
        - (or other settings activities under `TMessagesProj/src/main/java/top/qwq2333/nullgram/activity/` such as `ExperimentSettingActivity.java`).
-     - **String Resources:** `TMessagesProj/src/main/res/values/strings_nullgram.xml` (refer to [`itsuka-strings`](../itsuka-strings/SKILL.md) for string management and localization).
 
 ---
 
@@ -22,13 +21,7 @@ File: `TMessagesProj/src/main/java/top/qwq2333/nullgram/utils/Defines.kt`
 @StringConfig("DefaultValue") const val customOption = "customOption"
 ```
 
-### 2. String Resource in `strings_nullgram.xml`
-File: `TMessagesProj/src/main/res/values/strings_nullgram.xml`
-```xml
-<string name="DisableOption">Disable Option</string>
-```
-
-### 3. Setting UI Registration in Settings Activity
+### 2. Setting UI Registration in Settings Activity
 File: `TMessagesProj/src/main/java/top/qwq2333/nullgram/activity/GeneralSettingActivity.java` or `TMessagesProj/src/main/java/top/qwq2333/nullgram/activity/ChatSettingActivity.java`:
 
 - **Declare Row Field:**

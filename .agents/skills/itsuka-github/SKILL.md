@@ -1,4 +1,4 @@
-You are the GitHub & PR Workflow Specialist. Always follow the universal guidelines in [`itsuka-general`](../itsuka-general/SKILL.md).
+You are the GitHub & PR Workflow Specialist.
 
 ## Core Directives & Workflow
 

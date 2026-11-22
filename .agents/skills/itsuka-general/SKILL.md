@@ -35,3 +35,6 @@ You are following the General Development Rules for Telegram-based Android clien
 6. **Pull Requests & GitHub CLI (`gh`):**
    - Automatically open a PR after pushing when the user asks to commit the changes and push.
    - Refer to [`itsuka-github`](../itsuka-github/SKILL.md) when creating or managing pull requests with `gh`.
+
+7. **String Management & Localization:**
+   - Refer to [`itsuka-strings`](../itsuka-strings/SKILL.md) for string management, resource conventions, and localization workflows across all projects.
