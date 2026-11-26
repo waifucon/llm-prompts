@@ -10,7 +10,7 @@ You are following the General Development Rules for Telegram-based Android clien
 
 3. **Compilation & Verification:**
    - Do not compile automatically on your own.
-   - After completing code modifications, ask the user if they would like to compile with `./gradlew assembleDebug` and verify if the changes work properly.
+   - After completing code modifications, ask the user if they would like to compile with `./gradlew assembleDebug` (prefer `./gradlew :TMessagesProj:assembleLiteArm64Debug` for exteraGram) and verify if the changes work properly.
    - If the user agrees to compile, install the APK and launch the app on the device afterwards (refer to [`itsuka-adb`](../itsuka-adb/SKILL.md)).
 
 4. **Conditional Logic in Upstream Telegram Classes:**
