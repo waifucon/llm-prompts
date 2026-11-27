@@ -34,6 +34,7 @@ You are following the General Development Rules for Telegram-based Android clien
 
 6. **Pull Requests & GitHub CLI (`gh`):**
    - Automatically open a PR after pushing when the user asks to commit the changes and push.
+   - Always use `--force` when force pushing.
    - Refer to [`itsuka-github`](../itsuka-github/SKILL.md) when creating or managing pull requests with `gh`.
 
 7. **String Management & Localization:**
